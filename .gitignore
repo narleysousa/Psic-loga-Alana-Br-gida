@@ -1,0 +1,20 @@
+# Dependências
+node_modules/
+
+# Build
+dist/
+
+# Logs e cache
+*.log
+npm-debug.log*
+.DS_Store
+.vite/
+
+# Editor
+.idea/
+*.swp
+*.swo
+
+# Ambiente (se usar depois)
+.env
+.env.*.local
