@@ -158,23 +158,25 @@ function initInstagramFeed() {
   }
 }
 
-/** Faixa de fotos: loop infinito (duas faixas idênticas) + rolagem automática + setas. */
+/** Faixa de fotos: loop infinito via translateX (GPU) + setas. */
 function initInstaFeedMarquee() {
   const wrap = document.getElementById("instagram-static-marquee");
   const viewport = document.getElementById("insta-feed-viewport");
+  const inner = viewport && viewport.querySelector(".insta-feed__inner");
   const prev = document.getElementById("insta-feed-prev");
   const next = document.getElementById("insta-feed-next");
-  if (!wrap || !viewport || !prev || !next) return;
+  if (!wrap || !viewport || !inner || !prev || !next) return;
 
   const firstTrack = viewport.querySelector(".insta-feed__track");
   if (!firstTrack) return;
 
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   let pausedByHover = false;
+  let offset = 0;
   let last = performance.now();
-  let normalizing = false;
+  let arrowAnim = null;
 
-  function loopWidth() {
+  function halfWidth() {
     return firstTrack.offsetWidth;
   }
 
@@ -183,64 +185,66 @@ function initInstaFeedMarquee() {
     return item ? Math.round(item.getBoundingClientRect().width) : 280;
   }
 
-  /** Mantém scrollLeft no intervalo [0, L): mesma vista que o início da segunda cópia (loop infinito). */
-  function normalizeScroll() {
-    if (normalizing) return;
-    const hw = loopWidth();
-    if (hw <= 0) return;
-    let sl = viewport.scrollLeft;
-    if (sl < hw - 0.5) return;
-    normalizing = true;
-    while (sl >= hw - 0.25) {
-      sl -= hw;
-    }
-    viewport.scrollLeft = sl;
-    requestAnimationFrame(() => {
-      normalizing = false;
-    });
+  function applyTransform() {
+    inner.style.transform = `translateX(${-offset}px)`;
   }
 
-  viewport.addEventListener("scroll", normalizeScroll, { passive: true });
+  function normalize() {
+    const hw = halfWidth();
+    if (hw > 0) {
+      offset = ((offset % hw) + hw) % hw;
+    }
+  }
 
   function tick(now) {
     const elapsed = Math.min(now - last, 80);
     last = now;
 
-    if (!pausedByHover && !reduceMotion.matches) {
-      const hw = loopWidth();
+    if (!pausedByHover && !reduceMotion.matches && arrowAnim === null) {
+      const hw = halfWidth();
       if (hw > 0) {
-        const pxPerSec = hw / 48;
-        viewport.scrollLeft += (pxPerSec * elapsed) / 1000;
-        normalizeScroll();
+        offset += (hw / 48) * (elapsed / 1000);
+        normalize();
+        applyTransform();
       }
     }
 
     requestAnimationFrame(tick);
   }
 
-  wrap.addEventListener("mouseenter", () => {
-    pausedByHover = true;
-  });
-  wrap.addEventListener("mouseleave", () => {
-    pausedByHover = false;
-  });
+  function animateArrow(delta) {
+    if (arrowAnim !== null) cancelAnimationFrame(arrowAnim);
+    const target = offset + delta;
+    const duration = 350;
+    const start = performance.now();
+    const from = offset;
+
+    function step(now) {
+      const t = Math.min((now - start) / duration, 1);
+      const ease = t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+      offset = from + (target - from) * ease;
+      normalize();
+      applyTransform();
+      if (t < 1) {
+        arrowAnim = requestAnimationFrame(step);
+      } else {
+        arrowAnim = null;
+      }
+    }
+    arrowAnim = requestAnimationFrame(step);
+  }
+
+  wrap.addEventListener("mouseenter", () => { pausedByHover = true; });
+  wrap.addEventListener("mouseleave", () => { pausedByHover = false; last = performance.now(); });
 
   prev.addEventListener("click", (e) => {
     e.preventDefault();
-    const hw = loopWidth();
-    const step = getStep();
-    const sl = viewport.scrollLeft;
-    if (hw <= 0) return;
-    if (sl < 1) {
-      viewport.scrollLeft = Math.max(0, hw - step);
-    } else {
-      viewport.scrollBy({ left: -step, behavior: "smooth" });
-    }
+    animateArrow(-getStep());
   });
 
   next.addEventListener("click", (e) => {
     e.preventDefault();
-    viewport.scrollBy({ left: getStep(), behavior: "smooth" });
+    animateArrow(getStep());
   });
 
   requestAnimationFrame(tick);

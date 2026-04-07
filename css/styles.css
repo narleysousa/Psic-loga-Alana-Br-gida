@@ -755,22 +755,15 @@ code {
 }
 
 .insta-feed__viewport {
-  overflow-x: auto;
-  overflow-y: hidden;
+  overflow: hidden;
   width: 100%;
-  scroll-behavior: smooth;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-
-.insta-feed__viewport::-webkit-scrollbar {
-  display: none;
 }
 
 .insta-feed__inner {
   display: flex;
   width: max-content;
   gap: 0;
+  will-change: transform;
 }
 
 .insta-feed__nav {
