@@ -44,6 +44,31 @@ npm run preview  # serve a pasta dist/ localmente para testar o build
 
 Após o primeiro deploy, o site aparece em `https://SEU_USUARIO.github.io/SEU_REPO/` (ajuste conforme o nome do repositório).
 
-### Número do WhatsApp
+### WhatsApp e redes sociais
 
-Edite `js/main.js` e altere a constante `WHATSAPP_NUMBER` antes do `git push`.
+Edite `js/main.js` e preencha o objeto `SITE_CONFIG` com:
+
+- `whatsappNumber`
+- `socialLinks.instagram`
+- `socialLinks.tiktok`
+- `socialLinks.youtube`
+
+Os botões ficam desativados automaticamente enquanto esses dados não forem informados.
+
+## Checklist antes de publicar
+
+- Preencher `SITE_CONFIG.whatsappNumber` em `js/main.js`.
+- Revisar links de `socialLinks` (Instagram, TikTok, YouTube).
+- (Opcional) Preencher `snapWidgetEmbedId` para usar feed real do Instagram.
+- Rodar `npm run build` e conferir se a pasta `dist/` foi gerada sem erros.
+
+### Faixa do Instagram (fotos reais em rolagem)
+
+O Instagram não permite puxar posts direto no navegador sem API ou serviço autorizado. Para a faixa no fim da página mostrar **as publicações reais** de [@alanabrigidapsico](https://www.instagram.com/alanabrigidapsico/):
+
+1. Crie uma conta gratuita em [SnapWidget](https://snapwidget.com/).
+2. Conecte o perfil do Instagram e escolha um layout em **faixa / carrossel** (similar ao site de referência).
+3. Gere o embed e copie o **ID** que aparece na URL do `iframe` (trecho após `/embed/`).
+4. Em `js/main.js`, preencha `snapWidgetEmbedId: "SEU_ID"`.
+
+Com o ID preenchido, o site carrega o widget e **esconde** a faixa alternativa com fotos locais. Sem ID, continua a rolagem com imagens da pasta `assets/photos/`.
