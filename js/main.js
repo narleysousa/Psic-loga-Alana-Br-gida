@@ -10,7 +10,7 @@ const SITE_CONFIG = {
   socialLinks: {
     instagram: "https://www.instagram.com/alanabrigidapsico/",
     tiktok: "https://www.tiktok.com/@alanabrigidapsico",
-    youtube: "",
+    youtube: "https://www.youtube.com/@alanabrigidaa",
   },
   /**
    * Feed real do Instagram (fotos que rolam como no site de referência):
