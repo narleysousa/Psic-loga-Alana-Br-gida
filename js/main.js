@@ -9,7 +9,7 @@ const SITE_CONFIG = {
     "Oi Alana, vim pelo seu site. Gostaria de mais informações sobre psicoterapia.",
   socialLinks: {
     instagram: "https://www.instagram.com/alanabrigidapsico/",
-    tiktok: "",
+    tiktok: "https://www.tiktok.com/@alanabrigidapsico",
     youtube: "",
   },
   /**
