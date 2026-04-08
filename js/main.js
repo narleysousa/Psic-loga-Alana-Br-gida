@@ -5,6 +5,8 @@
  */
 const SITE_CONFIG = {
   whatsappNumber: "",
+  whatsappDirectLink:
+    "https://api.whatsapp.com/message/3FVRILTPOUVLC1?autoload=1&app_absent=0",
   whatsappMessage:
     "Oi Alana, vim pelo seu site. Gostaria de mais informações sobre psicoterapia.",
   socialLinks: {
@@ -46,6 +48,7 @@ function setDisabledLink(link) {
 }
 
 function buildWhatsAppUrl() {
+  if (SITE_CONFIG.whatsappDirectLink) return SITE_CONFIG.whatsappDirectLink;
   if (!isConfiguredWhatsApp(SITE_CONFIG.whatsappNumber)) return null;
   const text = encodeURIComponent(SITE_CONFIG.whatsappMessage);
   return `https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${text}`;
@@ -127,6 +130,20 @@ function initNav() {
 function initYear() {
   const el = document.getElementById("year");
   if (el) el.textContent = String(new Date().getFullYear());
+}
+
+function initBackToTop() {
+  const backToTop = document.querySelector(".site-footer__top");
+  if (!backToTop) return;
+
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  backToTop.addEventListener("click", (event) => {
+    event.preventDefault();
+    window.scrollTo({
+      top: 0,
+      behavior: reduceMotion.matches ? "auto" : "smooth",
+    });
+  });
 }
 
 function initInstagramFeed() {
@@ -276,5 +293,6 @@ document.addEventListener("DOMContentLoaded", () => {
   initInstaFeedMarquee();
   initNav();
   initYear();
+  initBackToTop();
   initRevealAnimations();
 });
