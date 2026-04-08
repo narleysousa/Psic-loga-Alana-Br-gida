@@ -902,13 +902,13 @@ code {
   justify-content: center;
   background: linear-gradient(
     165deg,
-    #f0a8c8 0%,
-    #d9669a 42%,
-    var(--accent) 100%
+    #60d66a 0%,
+    #25d366 42%,
+    #128c7e 100%
   );
   color: #fff;
   box-shadow:
-    0 4px 14px rgba(151, 53, 110, 0.42),
+    0 4px 14px rgba(37, 211, 102, 0.42),
     0 2px 6px rgba(0, 0, 0, 0.12);
   text-decoration: none;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -917,14 +917,14 @@ code {
 .whatsapp-fab:hover {
   transform: scale(1.06);
   box-shadow:
-    0 6px 20px rgba(151, 53, 110, 0.48),
+    0 6px 20px rgba(37, 211, 102, 0.48),
     0 3px 8px rgba(0, 0, 0, 0.14);
   color: #fff;
   text-decoration: none;
 }
 
 .whatsapp-fab:focus-visible {
-  outline: 2px solid var(--accent-dark);
+  outline: 2px solid #128c7e;
   outline-offset: 3px;
 }
 
