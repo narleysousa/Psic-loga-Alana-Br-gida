@@ -872,7 +872,7 @@ code {
 /* Botão flutuante WhatsApp (círculo + ícone oficial, cor rosa da marca) */
 .whatsapp-fab {
   position: fixed;
-  right: max(1rem, env(safe-area-inset-right));
+  right: max(1.6rem, env(safe-area-inset-right));
   bottom: max(1rem, env(safe-area-inset-bottom));
   z-index: 60;
   width: 60px;
