@@ -46,9 +46,9 @@ Após o primeiro deploy, o site aparece em `https://SEU_USUARIO.github.io/SEU_RE
 
 ### WhatsApp e redes sociais
 
-Edite `js/main.js` e preencha o objeto `SITE_CONFIG` com:
+Edite `js/main.js` e revise o objeto `SITE_CONFIG` com:
 
-- `whatsappNumber`
+- `whatsappDirectLink` ou `whatsappNumber`
 - `socialLinks.instagram`
 - `socialLinks.tiktok`
 - `socialLinks.youtube`
@@ -57,7 +57,7 @@ Os botões ficam desativados automaticamente enquanto esses dados não forem inf
 
 ## Checklist antes de publicar
 
-- Preencher `SITE_CONFIG.whatsappNumber` em `js/main.js`.
+- Conferir `SITE_CONFIG.whatsappDirectLink` ou preencher `SITE_CONFIG.whatsappNumber` em `js/main.js`.
 - Revisar links de `socialLinks` (Instagram, TikTok, YouTube).
 - (Opcional) Preencher `snapWidgetEmbedId` para usar feed real do Instagram.
 - Rodar `npm run build` e conferir se a pasta `dist/` foi gerada sem erros.

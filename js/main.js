@@ -70,14 +70,21 @@ function initWhatsAppLinks() {
     return;
   }
 
-  [mainLink, fab].forEach((link) => {
-    if (!link) return;
-    link.href = url;
-    link.classList.remove("is-disabled");
-    link.removeAttribute("aria-disabled");
-    link.target = "_blank";
-    link.rel = "noopener noreferrer";
-  });
+  if (mainLink) {
+    mainLink.href = url;
+    mainLink.classList.remove("is-disabled");
+    mainLink.removeAttribute("aria-disabled");
+    mainLink.target = "_blank";
+    mainLink.rel = "noopener noreferrer";
+  }
+
+  if (fab) {
+    fab.href = url;
+    fab.classList.remove("is-disabled");
+    fab.removeAttribute("aria-disabled");
+    fab.target = "_blank";
+    fab.rel = "noopener noreferrer";
+  }
 
   if (note) {
     note.textContent =
