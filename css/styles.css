@@ -330,7 +330,8 @@ code {
   margin: 0 0 1rem;
   max-width: 54ch;
   font-size: 1.2rem;
-  color: var(--text-muted);
+  font-weight: 700;
+  color: var(--text-strong);
 }
 
 .hero__sub {
@@ -384,14 +385,15 @@ code {
 }
 
 .btn--ghost {
-  background: rgba(255, 255, 255, 0.5);
-  border-color: rgba(151, 53, 110, 0.26);
-  color: var(--accent-dark);
+  background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+  border-color: transparent;
+  color: #fff;
+  box-shadow: 0 10px 24px rgba(151, 53, 110, 0.3);
 }
 
 .btn--ghost:hover {
-  background: var(--accent-soft);
-  border-color: rgba(151, 53, 110, 0.42);
+  color: #fff;
+  filter: brightness(1.04);
 }
 
 .btn--large {
