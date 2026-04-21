@@ -35,7 +35,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Allura&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="css/styles.css" />
@@ -149,7 +149,17 @@
       <section class="section section--soft reveal" id="sobre" aria-labelledby="sobre-title">
         <div class="container about-section">
           <div class="about-section__media">
-            <figure class="photo-frame photo-frame--portrait">
+            <figure class="photo-frame photo-frame--portrait photo-frame--about">
+              <div class="photo-frame__overlay photo-frame__overlay--about">
+                <h2 id="sobre-title" class="section__title section__title--on-photo">
+                  Sobre mim
+                </h2>
+                <p class="about-section__intro-on-photo">
+                  Me chamo Alana Brígida e sou psicóloga clínica. Atendo mulheres adultas
+                  em psicoterapia on-line, oferecendo um espaço acolhedor, ético e seguro
+                  para o cuidado da saúde mental.
+                </p>
+              </div>
               <img
                 class="photo-frame__img"
                 src="assets/photos/about-with-mug.jpeg"
@@ -162,12 +172,9 @@
           </div>
 
           <div class="about-section__content">
-            <h2 id="sobre-title" class="section__title">Sobre mim</h2>
             <div class="prose">
-              <p>
-                Me chamo Alana Brígida e sou psicóloga clínica. Atendo mulheres adultas
-                em psicoterapia on-line, oferecendo um espaço acolhedor, ético e seguro
-                para o cuidado da saúde mental.
+              <p class="about-section__script-question">
+                Por que escolhi atender mulheres?
               </p>
               <p>
                 Escolhi direcionar meu trabalho ao público feminino porque acredito na

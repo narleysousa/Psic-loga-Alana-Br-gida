@@ -104,6 +104,10 @@ code {
   padding: var(--space-section) 0;
 }
 
+#sobre.section {
+  padding-top: 1.5rem;
+}
+
 .section--soft {
   background:
     linear-gradient(180deg, rgba(247, 219, 234, 0.42), rgba(247, 219, 234, 0.18)),
@@ -139,8 +143,7 @@ code {
 
 /* Header */
 .site-header {
-  position: sticky;
-  top: 0;
+  position: relative;
   z-index: 50;
   background: rgba(253, 252, 251, 0.92);
   backdrop-filter: blur(12px);
@@ -239,7 +242,7 @@ code {
 /* Hero */
 .hero {
   position: relative;
-  padding: calc(var(--space-section) - 0.5rem) 0 calc(var(--space-section) + 1rem);
+  padding: calc(var(--space-section) - 0.5rem) 0 1.5rem;
   overflow: hidden;
 }
 
@@ -275,6 +278,11 @@ code {
   min-width: 0;
 }
 
+.about-section__content {
+  align-self: start;
+  margin-top: 0;
+}
+
 .media-stack {
   display: grid;
   gap: 1rem;
@@ -301,6 +309,50 @@ code {
 
 .photo-frame--portrait {
   aspect-ratio: 4 / 5;
+}
+
+.photo-frame--about {
+  position: relative;
+}
+
+.photo-frame__overlay--about {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  padding: clamp(1.1rem, 3.5vw, 1.85rem) clamp(1rem, 3vw, 1.5rem)
+    clamp(2.75rem, 9vw, 4.25rem);
+  border-radius: 31px 31px 0 0;
+  background: linear-gradient(
+    180deg,
+    rgba(253, 252, 251, 0.97) 0%,
+    rgba(253, 252, 251, 0.9) 32%,
+    rgba(253, 252, 251, 0.55) 62%,
+    transparent 100%
+  );
+}
+
+.section__title--on-photo {
+  margin: 0 0 0.65rem;
+  font-size: clamp(1.45rem, 3.2vw, 1.9rem);
+  color: var(--text-strong);
+}
+
+.about-section__intro-on-photo {
+  margin: 0;
+  max-width: 38ch;
+  font-size: clamp(0.98rem, 2.1vw, 1.08rem);
+  line-height: 1.55;
+  color: var(--text-muted);
+}
+
+.prose p.about-section__script-question {
+  margin: 0 0 1.25rem;
+  font-family: "Allura", cursive;
+  font-size: clamp(2rem, 4.5vw, 3.25rem);
+  line-height: 1.15;
+  color: var(--text-strong);
 }
 
 .photo-frame--tall,
@@ -979,6 +1031,10 @@ code {
   .service-block__inner--media,
   .service-block__inner--reverse {
     grid-template-columns: 1fr;
+  }
+
+  .about-section__content {
+    margin-top: 0;
   }
 }
 
