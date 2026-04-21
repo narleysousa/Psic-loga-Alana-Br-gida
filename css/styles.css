@@ -309,17 +309,17 @@ code {
 
 .eyebrow {
   margin: 0 0 0.75rem;
-  font-size: 0.8rem;
+  font-size: 1.4rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--accent-dark);
-  font-weight: 600;
+  font-weight: 800;
 }
 
 .hero__title {
   margin: 0 0 1rem;
   max-width: 16ch;
-  font-size: clamp(2rem, 5vw, 3rem);
+  font-size: 1.2rem;
   font-weight: 500;
   line-height: 1.08;
   letter-spacing: -0.04em;
@@ -329,13 +329,14 @@ code {
 .hero__lead {
   margin: 0 0 1rem;
   max-width: 54ch;
-  font-size: 1.125rem;
+  font-size: 1.2rem;
   color: var(--text-muted);
 }
 
 .hero__sub {
   margin: 0 0 2rem;
   max-width: 48ch;
+  font-size: 1.2rem;
   color: var(--text-muted);
 }
 

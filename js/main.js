@@ -86,10 +86,6 @@ function initWhatsAppLinks() {
     fab.rel = "noopener noreferrer";
   }
 
-  if (note) {
-    note.textContent =
-      "Ao clicar, o WhatsApp abre com uma mensagem inicial para facilitar o contato.";
-  }
 }
 
 function initSocialLinks() {
