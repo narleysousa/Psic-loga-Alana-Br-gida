@@ -136,13 +136,25 @@ function initSocialLinks() {
 function initNav() {
   const toggle = document.querySelector(".nav-toggle");
   const nav = document.querySelector(".nav");
+  const header = document.querySelector(".site-header");
   if (!toggle || !nav) return;
+
+  function syncMobileHeaderHeight() {
+    if (!header) return;
+    const headerHeight = Math.ceil(header.getBoundingClientRect().height);
+    document.documentElement.style.setProperty("--mobile-header-height", `${headerHeight}px`);
+  }
+
+  syncMobileHeaderHeight();
+  window.addEventListener("resize", syncMobileHeaderHeight);
+  window.addEventListener("orientationchange", syncMobileHeaderHeight);
 
   toggle.addEventListener("click", () => {
     const open = nav.classList.toggle("is-open");
     toggle.setAttribute("aria-expanded", open ? "true" : "false");
     toggle.setAttribute("aria-label", open ? "Fechar menu" : "Abrir menu");
     document.body.classList.toggle("nav-open", open);
+    if (open) syncMobileHeaderHeight();
   });
 
   nav.querySelectorAll("a").forEach((link) => {
