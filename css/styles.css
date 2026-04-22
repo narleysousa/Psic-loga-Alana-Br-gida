@@ -283,10 +283,47 @@ code {
   align-self: start;
 }
 
-.about-section__content {
+.about-section__media {
+  max-width: min(400px, 100%);
+  margin-left: clamp(0.65rem, 2vw, 1.5rem);
+}
+
+.photo-frame--about-photo {
+  aspect-ratio: 1 / 1;
+}
+
+.about-section__intro-aside {
   align-self: start;
-  margin-top: 0;
   width: 100%;
+  padding-top: clamp(0.75rem, 2.2vw, 1.5rem);
+  margin-left: clamp(-5.5rem, -12vw, -2rem);
+}
+
+.about-section__lead-text {
+  margin: 0;
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  color: var(--text-muted);
+}
+
+.about-section__lead-text + .about-section__lead-text {
+  margin-top: 1.1rem;
+}
+
+.about-section__below {
+  grid-column: 1 / -1;
+  margin-top: clamp(1.25rem, 3vw, 2rem);
+  background:
+    linear-gradient(180deg, rgba(247, 219, 234, 0.72), rgba(247, 219, 234, 0.5)),
+    var(--bg-soft);
+  border: 1px solid rgba(151, 53, 110, 0.16);
+  border-radius: var(--radius-lg);
+  padding: clamp(1.5rem, 4vw, 2.35rem);
+  box-shadow: var(--shadow);
+}
+
+.about-section__below.prose > * {
+  max-width: min(58ch, 100%);
 }
 
 .approach-section__content {
@@ -321,42 +358,6 @@ code {
 
 .photo-frame--portrait {
   aspect-ratio: 4 / 5;
-}
-
-.photo-frame--about {
-  position: relative;
-}
-
-.photo-frame__overlay--about {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 2;
-  padding: clamp(1.1rem, 3.5vw, 1.85rem) clamp(1rem, 3vw, 1.5rem)
-    clamp(2.75rem, 9vw, 4.25rem);
-  border-radius: 31px 31px 0 0;
-  background: linear-gradient(
-    180deg,
-    rgba(253, 252, 251, 0.97) 0%,
-    rgba(253, 252, 251, 0.9) 32%,
-    rgba(253, 252, 251, 0.55) 62%,
-    transparent 100%
-  );
-}
-
-.section__title--on-photo {
-  margin: 0 0 0.65rem;
-  font-size: clamp(1.45rem, 3.2vw, 1.9rem);
-  color: var(--text-strong);
-}
-
-.about-section__intro-on-photo {
-  margin: 0;
-  max-width: 38ch;
-  font-size: clamp(0.98rem, 2.1vw, 1.08rem);
-  line-height: 1.55;
-  color: var(--text-muted);
 }
 
 .prose p.about-section__script-question {
@@ -1061,8 +1062,12 @@ code {
     grid-template-columns: 1fr;
   }
 
-  .about-section__content {
-    margin-top: 0;
+  .about-section__intro-aside {
+    margin-left: 0;
+  }
+
+  .about-section__media {
+    margin-left: 0;
   }
 }
 
