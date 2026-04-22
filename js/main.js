@@ -6,7 +6,7 @@
 const SITE_CONFIG = {
   whatsappNumber: "",
   whatsappDirectLink:
-    "https://api.whatsapp.com/message/3FVRILTPOUVLC1?autoload=1&app_absent=0",
+    "https://wa.me/message/3FVRILTPOUVLC1",
   whatsappMessage:
     "Oi Alana, vim pelo seu site. Gostaria de mais informações sobre psicoterapia.",
   socialLinks: {
@@ -48,10 +48,27 @@ function setDisabledLink(link) {
 }
 
 function buildWhatsAppUrl() {
-  if (SITE_CONFIG.whatsappDirectLink) return SITE_CONFIG.whatsappDirectLink;
+  if (SITE_CONFIG.whatsappDirectLink) return normalizeWhatsAppUrl(SITE_CONFIG.whatsappDirectLink);
   if (!isConfiguredWhatsApp(SITE_CONFIG.whatsappNumber)) return null;
   const text = encodeURIComponent(SITE_CONFIG.whatsappMessage);
   return `https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${text}`;
+}
+
+function normalizeWhatsAppUrl(url) {
+  const value = String(url || "").trim();
+  if (!value) return null;
+
+  // Alguns browsers Android falham com api.whatsapp.com/message e query params antigos.
+  const directCodeMatch = value.match(/api\.whatsapp\.com\/message\/([A-Za-z0-9]+)(\?.*)?$/i);
+  if (directCodeMatch) {
+    return `https://wa.me/message/${directCodeMatch[1]}`;
+  }
+
+  return value;
+}
+
+function getWhatsAppTarget() {
+  return /Android/i.test(navigator.userAgent) ? "_self" : "_blank";
 }
 
 function initWhatsAppLinks() {
@@ -74,16 +91,24 @@ function initWhatsAppLinks() {
     mainLink.href = url;
     mainLink.classList.remove("is-disabled");
     mainLink.removeAttribute("aria-disabled");
-    mainLink.target = "_blank";
-    mainLink.rel = "noopener noreferrer";
+    mainLink.target = getWhatsAppTarget();
+    if (mainLink.target === "_blank") {
+      mainLink.rel = "noopener noreferrer";
+    } else {
+      mainLink.removeAttribute("rel");
+    }
   }
 
   if (fab) {
     fab.href = url;
     fab.classList.remove("is-disabled");
     fab.removeAttribute("aria-disabled");
-    fab.target = "_blank";
-    fab.rel = "noopener noreferrer";
+    fab.target = getWhatsAppTarget();
+    if (fab.target === "_blank") {
+      fab.rel = "noopener noreferrer";
+    } else {
+      fab.removeAttribute("rel");
+    }
   }
 
 }
@@ -273,6 +298,10 @@ function initInstaFeedMarquee() {
 function initRevealAnimations() {
   const els = document.querySelectorAll(".reveal");
   if (!els.length) return;
+  if (!("IntersectionObserver" in window)) {
+    els.forEach((el) => el.classList.add("is-visible"));
+    return;
+  }
 
   const observer = new IntersectionObserver(
     (entries) => {
